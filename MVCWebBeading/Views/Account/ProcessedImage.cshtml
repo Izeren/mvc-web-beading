@@ -1,0 +1,13 @@
+﻿@model MVCWebBeading.Models.ProcessedImageViewModel
+@{
+    ViewBag.Title = "ProcessedImage";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+@{
+    var imgSrc = String.Format("data:image/jpeg;base64,{0}", Model.base64);
+}
+
+<img src="@imgSrc" />
+<p>Your image was successfully proceded .</p>

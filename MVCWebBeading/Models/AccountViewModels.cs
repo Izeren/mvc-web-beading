@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Emgu.CV;
 using System.Web;
+using WebBeading;
 
 namespace MVCWebBeading.Models
 {
@@ -17,6 +18,7 @@ namespace MVCWebBeading.Models
         [Display(Name = "Изображение")]
         [Required]
         public HttpPostedFileBase File { get; set; }
+        public ICollection<string> ways { get; set; }
     }
 
     public class ProcessedImageViewModel

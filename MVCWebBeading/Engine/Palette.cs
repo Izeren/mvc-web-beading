@@ -11,9 +11,11 @@ namespace WebBeading
     public class Palette : IPalette
     {
         private IList<IPaletteColor> colors { get; set; }
+        private Dictionary<int, IPaletteColor> cache { get; set; }
 
         public Palette(StartPaletteSettings start_color_set = StartPaletteSettings.EMPTY)
         {
+            cache = new Dictionary<int, IPaletteColor>();
             switch(start_color_set)
             {
                 case StartPaletteSettings.EMPTY: 
@@ -89,23 +91,29 @@ namespace WebBeading
          */
         public IPaletteColor getClosest(int color)
         {
+            IPaletteColor result = null;
             if (colors.Count == 0)
             {
                 return null;
             }
+            else if (cache.TryGetValue(color, out result))
+            {
+                return result;
+            }
             else {
                 int delta = colors[0].getRGBDelta(color);
-                IPaletteColor currentClosest = colors[0];
+                result = colors[0];
                 foreach (IPaletteColor paletteColor in colors)
                 {
                     int currentDelta = paletteColor.getRGBDelta(color);
                     if (currentDelta < delta)
                     {
-                        currentClosest = paletteColor;
+                        result = paletteColor;
                         delta = currentDelta;
                     }
                 }
-                return currentClosest;
+                cache.Add(color, result);
+                return result;
             }
         }
 

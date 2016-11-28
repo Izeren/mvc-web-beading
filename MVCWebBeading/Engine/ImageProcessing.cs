@@ -87,7 +87,7 @@ namespace WebBeading
                     popularity[currentPaletteColor] += 1;
                 }
             }
-            return Utils.getMostPopularColorFromDict(popularity);
+            return Utils.Instance.getMostPopularColorFromDict(popularity);
         }
 
         private static IPaletteColor defineColorCFPTA(Mat image, IPalette palette)

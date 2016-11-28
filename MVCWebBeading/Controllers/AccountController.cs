@@ -102,8 +102,10 @@ namespace MVCWebBeading.Controllers
         public ActionResult ProcessImage()
         {
             ViewBag.Message = "Bixilizing page";
-            int selectedId = 1;
-            SelectList waysOfColorDefinition = new SelectList(Utils.Instance.StringWaysOfBixelColorDefinition);
+            int selectedId = 0;
+            var ways = Utils.Instance.StringWaysOfBixelColorDefinition;
+            SelectList waysOfColorDefinition = new SelectList(ways, ways.ElementAt(selectedId));
+            ViewBag.WaysOfColorDefinition = waysOfColorDefinition;
             return View();
         } 
 

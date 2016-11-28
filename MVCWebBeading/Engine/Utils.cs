@@ -12,6 +12,9 @@ namespace WebBeading
             StringWaysOfBixelColorDefinition.Add("Most popular of closest to palette");
             StringWaysOfBixelColorDefinition.Add("Closest to palette from average");
             StringWaysOfBixelColorDefinition.Add("Closest to palette from median");
+            namesToEnumWays[StringWaysOfBixelColorDefinition.ElementAt(0)] = WaysOfBixelColorDefinition.MostPopularOfClosestToPalette;
+            namesToEnumWays[StringWaysOfBixelColorDefinition.ElementAt(1)] = WaysOfBixelColorDefinition.ClosestFromPaletteToAverage;
+            namesToEnumWays[StringWaysOfBixelColorDefinition.ElementAt(2)] = WaysOfBixelColorDefinition.ClosestFromPaletteToMedian;
         }
         public static Utils Instance
         {
@@ -37,6 +40,7 @@ namespace WebBeading
             return currentBest.Key;
         }
         public ICollection<string> StringWaysOfBixelColorDefinition = new List<string>();
+        public Dictionary<string, WaysOfBixelColorDefinition> namesToEnumWays = new Dictionary<string, WaysOfBixelColorDefinition>();
     }
 
 }

@@ -105,7 +105,6 @@ namespace MVCWebBeading.Controllers
             int selectedId = 0;
             var ways = Utils.Instance.StringWaysOfBixelColorDefinition;
             SelectList waysOfColorDefinition = new SelectList(ways, ways.ElementAt(selectedId));
-            ViewBag.WaysOfColorDefinition = waysOfColorDefinition;
             TempData["SelectList"] = waysOfColorDefinition;
             return View();
         } 
@@ -136,8 +135,7 @@ namespace MVCWebBeading.Controllers
             int bixelHeight;
             int.TryParse(model.BixelHeight, out bixelHeight);
             int.TryParse(model.BixelWidth, out bixelWidth);
-            SelectList CurSelectList = (SelectList)TempData["SelectList"];
-            string SelectedWay = (string)CurSelectList.SelectedValue;
+            string SelectedWay = Request.Form["SelectListWithWays"];
             var WayOfColorDefinition = Utils.Instance.namesToEnumWays[SelectedWay];
 
             Palette palette = null;

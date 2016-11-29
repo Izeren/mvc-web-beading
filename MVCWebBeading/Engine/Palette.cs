@@ -6,17 +6,18 @@ using System.Web;
 namespace WebBeading
 {
     public enum StartPaletteSettings {
-        EMPTY, WEB_SAFE
+        EMPTY, WEB_SAFE, STRING
     }
     public class Palette : IPalette
     {
         private IList<IPaletteColor> colors { get; set; }
         private Dictionary<int, IPaletteColor> cache { get; set; }
 
-        public Palette(StartPaletteSettings start_color_set = StartPaletteSettings.EMPTY)
+        public Palette(StartPaletteSettings start_color_set = StartPaletteSettings.EMPTY, string description = "")
         {
             cache = new Dictionary<int, IPaletteColor>();
-            switch(start_color_set)
+            colors = new List<IPaletteColor>();
+            switch (start_color_set)
             {
                 case StartPaletteSettings.EMPTY: 
                     {
@@ -28,6 +29,11 @@ namespace WebBeading
                         setWithWebSafePalette();
                         break;
                     }
+                case StartPaletteSettings.STRING:
+                    {
+                        parseColorsFromString(description);
+                        break;
+                    }
                 default:
                     break;
             }
@@ -35,7 +41,6 @@ namespace WebBeading
 
         public void setWithWebSafePalette()
         {
-            colors = new List<IPaletteColor>();
             for (int red = 0; red < 256; red += 51)
             {
                 for (int green = 0; green < 256; green += 51)
@@ -45,6 +50,15 @@ namespace WebBeading
                         colors.Add(new PaletteColor(red, green, blue));
                     }
                 }
+            }
+        }
+
+        public void parseColorsFromString(string description)
+        {
+            int[] tmpColors = Array.ConvertAll<string, int>(description.Split(','), int.Parse);
+            foreach (var tmpColor in tmpColors)
+            {
+                colors.Add(new PaletteColor(tmpColor));
             }
         }
 

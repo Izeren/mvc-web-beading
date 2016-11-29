@@ -139,13 +139,23 @@ namespace MVCWebBeading.Controllers
             SelectList CurSelectList = (SelectList)TempData["SelectList"];
             string SelectedWay = (string)CurSelectList.SelectedValue;
             var WayOfColorDefinition = Utils.Instance.namesToEnumWays[SelectedWay];
+
+            Palette palette = null;
+            if (model.PaletteDescription != "")
+            {
+                palette = new Palette(StartPaletteSettings.STRING, model.PaletteDescription);
+            } else
+            {
+                palette = new Palette(StartPaletteSettings.WEB_SAFE);
+            }
+
             LayerOptions options = new LayerOptions(
                 image.Cols,
                 image.Rows,
                 bixelWidth,
                 bixelHeight,
                 WayOfColorDefinition,
-                new Palette(StartPaletteSettings.WEB_SAFE)
+                palette
                 );
             Layer layer = new Layer(image, options);
             ProcessedImageViewModel resModel = new ProcessedImageViewModel();

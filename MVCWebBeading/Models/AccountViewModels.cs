@@ -19,6 +19,7 @@ namespace MVCWebBeading.Models
         [Required]
         public HttpPostedFileBase File { get; set; }
         public ICollection<string> WaysOfColorDefinition { get; set; }
+        public string PaletteDescription { get; set; }
     }
 
     public class ProcessedImageViewModel

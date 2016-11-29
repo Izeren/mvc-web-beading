@@ -141,7 +141,7 @@ namespace MVCWebBeading.Controllers
             var WayOfColorDefinition = Utils.Instance.namesToEnumWays[SelectedWay];
 
             Palette palette = null;
-            if (model.PaletteDescription != "")
+            if (model.PaletteDescription != null)
             {
                 palette = new Palette(StartPaletteSettings.STRING, model.PaletteDescription);
             } else
